@@ -1,5 +1,9 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
+
+import 'components/vplayer.dart';
 
 void main() {
   runApp(BoomApp());
@@ -20,245 +24,232 @@ class BoomApp extends StatelessWidget {
 class BoomPage extends StatelessWidget {
   const BoomPage({Key key}) : super(key: key);
 
+  //Grads:0xFFECBD8C && 0xFFCCBEB5
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          NetworkVideo(
-            url:
-                'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4',
-            playerWidgetBuilder: (_controller) {
-              return FittedBox(
-                fit: BoxFit.cover,
-                child: SizedBox(
-                  height: _controller.value.size.height,
-                  width: _controller.value.size.width,
-                  child: VideoPlayer(_controller),
-                ),
-              );
-            },
+      appBar: AppBar(
+        backgroundColor: Color(0xDDECBD8C),
+        elevation: 0,
+      ),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Color(0xDDECBD8C),
+              Color(0xAFCCBEB5),
+              Colors.grey[200],
+            ],
           ),
-          Expanded(
-              child: Container(
-            width: double.infinity,
-            padding: EdgeInsets.only(left: 20),
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  SizedBox(
-                    height: 30,
-                  ), //TopHeight
-                  EmotionHeader(
-                    text: "Happiness",
-                  ),
-                  EmotionRow(
-                    children: [
-                      EmotionCircle(
-                        text: "Happy",
-                        isFilled: true,
+        ),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: FileVideo(
+                assetURI: 'assets/v1.mp4',
+                playerWidgetBuilder: (_controller) {
+                  return FittedBox(
+                    fit: BoxFit.cover,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(30),
+                      child: Container(
+                        height: _controller.value.size.height,
+                        width: _controller.value.size.width,
+                        child: VideoPlayer(_controller),
                       ),
-                      EmotionCircle(text: "Happy"),
-                      EmotionCircle(
-                        text: "Happy",
-                      ),
-                      EmotionCircle(text: "Happy"),
-                      EmotionCircle(text: "Happy"),
-                    ],
-                  ),
-
-                  EmotionHeader(
-                    text: "Euphoric",
-                  ),
-                  EmotionRow(
-                    children: [
-                      EmotionCircle(text: "Happy"),
-                      EmotionCircle(
-                        text: "Happy",
-                        isFilled: true,
-                      ),
-                      EmotionCircle(
-                        text: "Happy",
-                      ),
-                      EmotionCircle(text: "Happy"),
-                      EmotionCircle(text: "Happy"),
-                    ],
-                  ),
-                  EmotionHeader(
-                    text: "Anxiety",
-                  ),
-                  EmotionRow(
-                    children: [
-                      EmotionCircle(text: "Happy"),
-                      EmotionCircle(text: "Happy"),
-                      EmotionCircle(text: "Happy"),
-                      EmotionCircle(text: "Happy"),
-                      EmotionCircle(
-                        text: "Happy",
-                        isFilled: true,
-                      ),
-                    ],
-                  ),
-                  EmotionHeader(
-                    text: "Love",
-                  ),
-                  EmotionRow(
-                    children: [
-                      EmotionCircle(text: "Happy"),
-                      EmotionCircle(text: "Happy"),
-                      EmotionCircle(
-                        text: "Happy",
-                      ),
-                      EmotionCircle(
-                        text: "Happy",
-                        isFilled: true,
-                      ),
-                      EmotionCircle(text: "Happy"),
-                    ],
-                  ),
-
-                  SizedBox(
-                    height: 30,
-                  ), //BottomHeight
-                ],
+                    ),
+                  );
+                },
               ),
             ),
-          ))
-        ],
+            Expanded(
+                child: Container(
+              width: double.infinity,
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    SizedBox(
+                      height: 10,
+                    ),
+                    EmotionBox(
+                      emotionName: "Happiness",
+                      backgroundColor: Colors.blue[300],
+                      headerColor: Colors.blue[900],
+                      emotions: [
+                        EmotionButton(
+                          text: "😂 Laughter",
+                          onPressed: () {},
+                        ),
+                        EmotionButton(
+                          text: "😂 Laughter",
+                          onPressed: () {},
+                        ),
+                        EmotionButton(
+                          text: "😂 Laughter",
+                          onPressed: () {},
+                        ),
+                        EmotionButton(
+                          text: "😂 Laughter",
+                          onPressed: () {},
+                        ),
+                      ],
+                    ),
+                    EmotionBox(
+                      emotionName: "Love",
+                      backgroundColor: Colors.red[300],
+                      headerColor: Colors.red[900],
+                      emotions: [
+                        EmotionButton(
+                          text: "😂 Laughter",
+                          onPressed: () {},
+                        ),
+                        EmotionButton(
+                          text: "😂 Laughter",
+                          onPressed: () {},
+                        ),
+                        EmotionButton(
+                          text: "😂 Laughter",
+                          onPressed: () {},
+                        ),
+                        EmotionButton(
+                          text: "😂 Laughter",
+                          onPressed: () {},
+                        ),
+                      ],
+                    ),
+                    EmotionBox(
+                      emotionName: "Euphoric",
+                      backgroundColor: Colors.green[300],
+                      headerColor: Colors.green[900],
+                      emotions: [
+                        EmotionButton(
+                          text: "😂 Laughter",
+                          onPressed: () {},
+                        ),
+                        EmotionButton(
+                          text: "😂 Laughter",
+                          onPressed: () {},
+                        ),
+                        EmotionButton(
+                          text: "😂 Laughter",
+                          onPressed: () {},
+                        ),
+                        EmotionButton(
+                          text: "😂 Laughter",
+                          onPressed: () {},
+                        ),
+                      ],
+                    ),
+                    EmotionBox(
+                      emotionName: "Anxiety",
+                      backgroundColor: Colors.blueGrey[300],
+                      headerColor: Colors.blueGrey[900],
+                      emotions: [
+                        EmotionButton(
+                          text: "😂 Laughter",
+                          onPressed: () {},
+                        ),
+                        EmotionButton(
+                          text: "😂 Laughter",
+                          onPressed: () {},
+                        ),
+                        EmotionButton(
+                          text: "😂 Laughter",
+                          onPressed: () {},
+                        ),
+                        EmotionButton(
+                          text: "😂 Laughter",
+                          onPressed: () {},
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ), //BottomHeight
+                  ],
+                ),
+              ),
+            ))
+          ],
+        ),
       ),
     );
   }
 }
 
-class EmotionRow extends StatelessWidget {
-  final List<Widget> children;
-  const EmotionRow({Key key, this.children}) : super(key: key);
+class EmotionBox extends StatelessWidget {
+  final String emotionName;
+  final Color backgroundColor;
+  final List<EmotionButton> emotions;
+  final Color headerColor;
 
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Row(children: children),
-      scrollDirection: Axis.horizontal,
-      padding: EdgeInsets.only(bottom: 20.0),
-    );
-  }
-}
-
-class EmotionHeader extends StatelessWidget {
-  final String text;
-  const EmotionHeader({Key key, this.text}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(
-          text,
-          style: TextStyle(
-            fontSize: 30,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        SizedBox(
-          height: 10,
-        )
-      ],
-    );
-  }
-}
-
-class EmotionCircle extends StatelessWidget {
-  final String text;
-  final bool isFilled;
-  const EmotionCircle({Key key, this.text, this.isFilled = false})
+  const EmotionBox(
+      {Key key,
+      this.emotionName,
+      this.backgroundColor,
+      this.emotions,
+      this.headerColor})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 10.0),
-      child: CircleAvatar(
-        backgroundColor: Colors.black,
-        radius: 47.0,
-        child: CircleAvatar(
-          radius: 46,
-          backgroundColor: (this.isFilled) ? Colors.black : Colors.white,
-          foregroundColor: (this.isFilled) ? Colors.white : Colors.black,
-          child: Text(text),
+    return Container(
+      margin: EdgeInsets.only(bottom: 10),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(8),
+        child: Container(
+          width: double.infinity,
+          padding: EdgeInsets.only(left: 20, top: 20, bottom: 20),
+          color: backgroundColor ?? Colors.white,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                emotionName,
+                style: TextStyle(
+                  fontSize: 30,
+                  color: headerColor ?? Colors.white70,
+                ),
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(children: emotions),
+              )
+            ],
+          ),
         ),
       ),
     );
   }
 }
 
-class NetworkVideo extends StatefulWidget {
-  final String url;
-  final bool isMuted;
-  final bool isLooping;
-  final Function(VideoPlayerController) playerWidgetBuilder;
-  const NetworkVideo({
-    this.url,
-    this.isMuted = false,
-    this.isLooping = true,
-    this.playerWidgetBuilder,
-  });
+class EmotionButton extends StatelessWidget {
+  final String text;
+  final Function onPressed;
 
-  @override
-  _NetworkVideoState createState() => _NetworkVideoState();
-}
-
-class _NetworkVideoState extends State<NetworkVideo> {
-  VideoPlayerController _controller;
-  bool paused = false;
-
-  @override
-  void initState() {
-    _controller = VideoPlayerController.network(widget.url)
-      ..initialize().then((_) {
-        setState(() {});
-      })
-      ..setLooping(widget.isLooping)
-      ..play();
-
-    super.initState();
-  }
-
-  void dispose() {
-    super.dispose();
-    _controller.dispose();
-  }
+  const EmotionButton({Key key, this.text, this.onPressed}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    _controller.setVolume(widget.isMuted ? 0 : 1);
-    return InkWell(
-      onTap: () {
-        if (paused)
-          _controller.pause();
-        else
-          _controller.play();
-        setState(() => paused = !paused);
-      },
-      child: Container(
-        child: _controller.value.initialized
-            //child: VideoPlayer(_controller)
-            ? widget.playerWidgetBuilder(_controller)
-            : Column(
-                children: [
-                  Container(
-                    child: Text(
-                      "Loading Video",
-                      style: TextStyle(
-                        color: Colors.black12,
-                        fontSize: 12,
-                      ),
-                    ),
-                    transform: Matrix4.translationValues(0.0, -13.0, 0.0),
-                  ),
-                ],
-              ),
+    return Padding(
+      padding: const EdgeInsets.only(right: 8.0),
+      child: RaisedButton(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(3)),
+        child: Text(
+          text,
+          style: TextStyle(fontSize: 20),
+        ),
+        onPressed: () => onPressed(),
       ),
     );
   }
